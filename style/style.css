@@ -55,6 +55,7 @@ html,body{
   border: none;
   background-color: transparent;
   cursor: pointerad;
+  padding: 15%;
 }
 .score-bar{
   padding: 0 1%;
@@ -96,4 +97,15 @@ html,body{
   color: rgb(28, 49, 80);
   display: flex;
   font-size: 180%;
+}
+
+.circle{
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.xMark{
+  display: none;
+  width: 100%;
+  height: 100%;
 }
