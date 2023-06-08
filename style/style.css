@@ -54,7 +54,7 @@ html,body{
 .playing-field button{
   border: none;
   background-color: transparent;
-  cursor: pointerad;
+  cursor: pointer;
   padding: 15%;
 }
 .score-bar{
