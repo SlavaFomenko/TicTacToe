@@ -56,6 +56,9 @@ html,body{
   background-color: transparent;
   cursor: pointer;
   padding: 15%;
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .score-bar{
   padding: 0 1%;
