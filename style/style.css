@@ -82,8 +82,20 @@ html,body{
 }
 .player-info{
   height: 100%;
-  width: 100%;
+  width: min-content;
   /* border: 1px solid #000; */
+}
+#btn-restart{
+  font-family: 'Nova Round', cursive;
+  font-size: 100%;
+  text-transform: uppercase;
+  width: max-content;
+  background-color: white;
+
+  /* margin-right: 5%; */
+  border: 3px solid rgb(28, 49, 80) ;
+  padding: 5%;
+  border-radius: 10px;
 }
 #player-avatar-xmark{
   width: 60px;
@@ -145,7 +157,7 @@ html,body{
   background-color: rgb(190, 41, 0);
   border-radius: 100px;
   /* rotate:45deg; 
-  right: -1.5%;
+  left:; 
   z-index: 2; */
   width: 3%;
   height:100%;

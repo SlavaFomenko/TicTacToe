@@ -1,15 +1,41 @@
 "use strict";
-let xScore = 0;
-let oScore = 0;
-
-let currentButton = null;
+// let currentButton = null;
 let currentPlayer = false; // false = x , true = o
 let stepCounter = 0;
-const gamePosition = [
+let winAnimationTimeout;
+let gamePosition = [
   null, null, null,
   null, null, null,
   null, null, null
 ];
+const restartBtn = document.getElementById('btn-restart');
+
+restartBtn.onclick = () => {
+// currentButton = null;
+currentPlayer = false; // false = x , true = o
+stepCounter = 0;
+gamePosition = [
+  null, null, null,
+  null, null, null,
+  null, null, null
+];
+clearTimeout(winAnimationTimeout)
+  const demonstrationVictory = document.getElementById('demonstrationVictory');
+  demonstrationVictory.style.animation = 'none';
+  demonstrationVictory.style.zIndex = '0';
+  demonstrationVictory.style.rotate = '0';
+  demonstrationVictory.style.right = '0';
+  demonstrationVictory.style.width = '3%';
+  demonstrationVictory.style.height = '0';
+  const divElement = document.getElementById("buttons");
+  const buttons = divElement.querySelectorAll("#buttons button");
+  buttons.forEach(function (button) {
+    button.disabled = false;
+    button.style.backgroundImage = 'none';
+  });
+
+}
+
 function clickButton(currentButton, iconPosition) {
   stepCounter++;
   currentButton.disabled = true; // deactivate curent button
@@ -32,7 +58,6 @@ function clickButton(currentButton, iconPosition) {
       const lastPlayerAvatar = document.querySelector('#player-avatar-xmark img');
       lastPlayerAvatar.style.animation = 'none';
 
-      
     }
   }
 }
@@ -59,9 +84,17 @@ function showWinerLine(winLine) {
   if (winLine >= 0 && winLine < 3) {
     demonstrationVictory.style.left = '-1.5%';
     demonstrationVictory.style.rotate = '-90deg';
+    demonstrationVictory.style.height = '100%';
+  }
+  if (winLine >= 3 && winLine < 9) {
+    demonstrationVictory.style.top = '0'
+    demonstrationVictory.style.left = '0';
+    demonstrationVictory.style.height = '100%';
+    demonstrationVictory.style.rotate = '0deg';
   }
   if (winLine === 6) {
-    demonstrationVictory.style.right = '-1.5%';
+    // debugger
+    demonstrationVictory.style.left = '98.5%';
     demonstrationVictory.style.rotate = '45deg';
     demonstrationVictory.style.height = '140%';
   }
@@ -88,7 +121,7 @@ function showWinerLine(winLine) {
       demonstrationVictory.style.left = '48.5%';
       break;
     case 5:
-      demonstrationVictory.style.right = '14.5%';
+      demonstrationVictory.style.left = '82.5%';
       break;
     case 6:
       demonstrationVictory.style.right = '-1.5%';
@@ -138,9 +171,9 @@ function checkFinishGame() {
       gamePosition[midleElem] === gamePosition[lastElem]) {
       // debugger
       disabledButtons();
-      setTimeout(() => {
+      winAnimationTimeout = setTimeout(() => {
         showWinerLine(i);
-      }, 1500)
+      }, 700)
 
       return true;
     }
