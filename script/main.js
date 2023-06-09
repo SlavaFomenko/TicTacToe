@@ -1,3 +1,4 @@
+"use strict";
 let xScore = 0;
 let oScore = 0;
 
@@ -9,7 +10,6 @@ const gamePosition = [
   null, null, null,
   null, null, null
 ];
-
 function clickButton(currentButton, iconPosition) {
   stepCounter++;
   currentButton.disabled = true; // deactivate curent button
@@ -21,9 +21,6 @@ function clickButton(currentButton, iconPosition) {
       gamePosition[iconPosition - 1] = 'x';
     }
   }
-  if (stepCounter >= 5) {
-    checkFinishGame();
-  }
 
   showMove(currentButton); // chenge player
   if (currentPlayer === false) {
@@ -31,33 +28,102 @@ function clickButton(currentButton, iconPosition) {
   } else {
     currentPlayer = false;
   }
+  if (stepCounter >= 5) {
+    checkFinishGame();
+  }
 }
+function showWinerLine(winLine) {
+  console.log(winLine)
+  const demonstrationVictory = document.getElementById('demonstrationVictory');
+  demonstrationVictory.style.zIndex = '2';
+  if (winLine >= 0 && winLine < 3) {
+    demonstrationVictory.style.left = '-1.5%';
+    demonstrationVictory.style.rotate = '-90deg';
+  }
+  if (winLine === 6) {
+    demonstrationVictory.style.right = '-1.5%';
+    demonstrationVictory.style.rotate = '45deg';
+    demonstrationVictory.style.height = '140%';
+  }
+  if (winLine === 7) {
+    demonstrationVictory.style.right = '-80.5%';
+    // demonstrationVictory.style.rotate = '45deg';
+    demonstrationVictory.style.height = '140%';
+  }
+  demonstrationVictory.style.animation = 'win-animation 3s forwards';
+  switch (winLine) {
+    case 0:
+      demonstrationVictory.style.top = '16%';
+      break;
+    case 1:
+      demonstrationVictory.style.top = '50%';
+      break;
+    case 2:
+      demonstrationVictory.style.top = '84%';
+      break;
+    case 3:
+      demonstrationVictory.style.left = '14.5%';
+      break;
+    case 4:
+      demonstrationVictory.style.left = '48.5%';
+      break;
+    case 5:
+      demonstrationVictory.style.right = '14.5%';
+      break;
+    case 6:
+      demonstrationVictory.style.right = '-1.5%';
+      demonstrationVictory.style.rotate = '45deg';
+      break;
+    case 7:
+      demonstrationVictory.style.left = '-1.5%';
+      demonstrationVictory.style.rotate = '-45deg';
+      break;
 
+
+    default:
+      break;
+  }
+}
+function disabledButtons() {
+  const divElement = document.getElementById("buttons");
+  const buttons = divElement.querySelectorAll("#buttons button");
+  buttons.forEach(function (button) {
+    button.disabled = true;
+  });
+}
 function checkFinishGame() {
-  let playerCheck = 'o'
+  let playerCheck = 'x'
   if (currentPlayer === false) {
-    playerCheck = 'x';
+    playerCheck = 'o';
   }
   // console.log(playerCheck)
   const winLines = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,9],
-    [2,4,6],
-    [0,4,8],
-   ]
-// debugger
-   for(let i = 0; i < winLines.length;i++){
-    const [firstElem , midleElem, lastElem] = winLines[i];
-    if(gamePosition[firstElem] === gamePosition[midleElem] && gamePosition[midleElem]=== gamePosition[lastElem]){
-      // console.log(playerCheck + " winn")
-      
-      break;
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+
+    [2, 4, 6],
+    [0, 4, 8],
+  ]
+  // debugger
+  for (let i = 0; i < winLines.length; i++) {
+    // debugger
+    const [firstElem, midleElem, lastElem] = winLines[i];
+    if (gamePosition[firstElem] == playerCheck &&
+      gamePosition[firstElem] === gamePosition[midleElem] &&
+      gamePosition[midleElem] === gamePosition[lastElem]) {
+      // debugger
+      disabledButtons();
+      setTimeout(() => {
+        showWinerLine(i);
+      }, 1500)
+      return
     }
-   }
+  }
 }
 
 
