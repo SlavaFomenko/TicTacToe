@@ -85,7 +85,7 @@ html,body{
   width: 100%;
   /* border: 1px solid #000; */
 }
-.player-avatar{
+#player-avatar-xmark{
   width: 60px;
   height: 60px;
   display: flex;
@@ -94,8 +94,34 @@ html,body{
   border: 5px solid rgb(28, 49, 80);
   border-radius: 50%;
 }
-.player-avatar img{
+#player-avatar-circle{
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid rgb(28, 49, 80);
+  border-radius: 50%;
+}
+#player-avatar-xmark img{
   width: 60%;
+  /* animation: pulse-avatar 1s infinite; */
+}
+#player-avatar-circle img{
+  width: 60%;
+  /* animation: pulse-avatar 1s infinite; */
+}
+@keyframes pulse-avatar {
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.15);
+  }
+  100%{    
+    transform: scale(1);
+  }
+  
 }
 .player-info{
   display: flex;
@@ -116,7 +142,7 @@ html,body{
 #demonstrationVictory{
   position: absolute;
   transform-origin: top center !important;
-  background-color: rgba(43, 255, 0, 0.715);
+  background-color: rgb(190, 41, 0);
   border-radius: 100px;
   /* rotate:45deg; 
   right: -1.5%;

@@ -22,14 +22,34 @@ function clickButton(currentButton, iconPosition) {
     }
   }
 
-  showMove(currentButton); // chenge player
-  if (currentPlayer === false) {
+  showMove(currentButton);
+  chengePlayer();
+ 
+  if (stepCounter >= 5) {
+    if(checkFinishGame()){
+      const playerAvatar = document.querySelector('#player-avatar-circle img');
+      playerAvatar.style.animation = 'none';
+      const lastPlayerAvatar = document.querySelector('#player-avatar-xmark img');
+      lastPlayerAvatar.style.animation = 'none';
+
+      
+    }
+  }
+}
+function chengePlayer (){
+  if (currentPlayer === false) {//chenge player
     currentPlayer = true
+    
+    const lastPlayerAvatar = document.querySelector('#player-avatar-xmark img');
+    lastPlayerAvatar.style.animation = 'none';
+    const playerAvatar = document.querySelector('#player-avatar-circle img');
+    playerAvatar.style.animation = 'pulse-avatar 1s infinite';
   } else {
     currentPlayer = false;
-  }
-  if (stepCounter >= 5) {
-    checkFinishGame();
+    const lastPlayerAvatar = document.querySelector('#player-avatar-circle img');
+    lastPlayerAvatar.style.animation = 'none';
+    const playerAvatar = document.querySelector('#player-avatar-xmark img');
+    playerAvatar.style.animation = 'pulse-avatar 1s infinite';
   }
 }
 function showWinerLine(winLine) {
@@ -121,7 +141,8 @@ function checkFinishGame() {
       setTimeout(() => {
         showWinerLine(i);
       }, 1500)
-      return
+
+      return true;
     }
   }
 }
